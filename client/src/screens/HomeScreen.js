@@ -5,18 +5,27 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
+import CarouselSite from "../components/Carousel";
 
-const HomeScreen = () => {
+const HomeScreen = ({ match }) => {
+  const keyword = match.params.keyword;
+
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    dispatch(listProducts(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <>
+      <p>
+        Vous trouverez sur cette boutique des soins et des objets de décoration
+        inspirés de la nature et réalisés par des artisans ayant à coeur
+        l’environnement.
+      </p>
+      {!keyword && <CarouselSite />}
       <h1>Latest products</h1>
       {loading ? (
         <Loader />

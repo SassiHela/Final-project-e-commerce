@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -145,6 +145,14 @@ const OrderScreen = ({ match }) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {/* {!order.isPaid && (
+                <ListGroup.Item>
+                  {!loadingPay ? (
+                    <Loader />
+                  ) : (
+                  )}
+                </ListGroup.Item>
+              )} */}
             </ListGroup>
           </Card>
         </Col>

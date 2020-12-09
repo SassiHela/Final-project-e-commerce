@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/orderModel");
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 // @desc   Create new order
 // @route  POST /api/orders
