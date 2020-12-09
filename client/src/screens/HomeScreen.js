@@ -20,13 +20,13 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
-      <p>
-        Vous trouverez sur cette boutique des soins et des objets de décoration
-        inspirés de la nature et réalisés par des artisans ayant à coeur
-        l’environnement.
-      </p>
+      <h6 style={{ textAlign: "center", lineHeight: "1.6em" }}>
+        Investissez dans des produits qui durent plus longtemps et privilégiez
+        ce qui est réutilisable pour limiter de manière drastique ses déchet.
+      </h6>
       {!keyword && <CarouselSite />}
-      <h1>Latest products</h1>
+      <br></br>
+      <h1>Dernières nouveautés</h1>
       {loading ? (
         <Loader />
       ) : error ? (

@@ -25,13 +25,13 @@ const ShippingScreen = ({ history }) => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 />
-      <h1>shipping</h1>
+      <h1>Détails De Facturation</h1>
       <Form onSubmit={submithandler}>
         <Form.Group controlId="address">
-          <Form.Label>Address</Form.Label>
+          <Form.Label>Numéro et nom de rue</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter address"
+            placeholder="Numéro de voie et nom de rue"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
@@ -39,10 +39,10 @@ const ShippingScreen = ({ history }) => {
         </Form.Group>
 
         <Form.Group controlId="city">
-          <Form.Label>City</Form.Label>
+          <Form.Label>Ville</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter city"
+            placeholder="Ville"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
@@ -50,10 +50,10 @@ const ShippingScreen = ({ history }) => {
         </Form.Group>
 
         <Form.Group controlId="postalCode">
-          <Form.Label>Postal Code</Form.Label>
+          <Form.Label>Code postal</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter postal code"
+            placeholder="Code postal"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
             required
@@ -61,10 +61,10 @@ const ShippingScreen = ({ history }) => {
         </Form.Group>
 
         <Form.Group controlId="country">
-          <Form.Label>Country</Form.Label>
+          <Form.Label>Pays</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter country"
+            placeholder="Pays"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required

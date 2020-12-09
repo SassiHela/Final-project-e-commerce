@@ -18,8 +18,8 @@ const Header = () => {
     <header>
       <Navbar bg="light" expand="lg" collapseOnSelect>
         <Container>
-          <LinkContainer to="">
-            <Navbar.Brand>My Shop</Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand>Zéro Déchet</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -27,19 +27,19 @@ const Header = () => {
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i>Cart
+                  <i className="fas fa-shopping-cart"></i> Panier
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
+                    Se déconnecter
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>
-                    <i className="fas fa-user"></i>Sign in
+                    <i className="fas fa-user"></i> Se connecter
                   </Nav.Link>
                 </LinkContainer>
               )}
