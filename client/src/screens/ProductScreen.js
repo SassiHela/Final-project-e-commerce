@@ -32,7 +32,7 @@ const ProductScreen = ({ history, match }) => {
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
-        Go Back
+        <i class="fas fa-angle-double-left"></i> Retour
       </Link>
 
       {loading ? (
@@ -49,9 +49,9 @@ const ProductScreen = ({ history, match }) => {
               <ListGroup.Item>
                 <h3>{product.name}</h3>
               </ListGroup.Item>
-              <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
+              <ListGroup.Item>Prix : ${product.price}</ListGroup.Item>
               <ListGroup.Item>
-                Desccription : {product.description}
+                Description : {product.description}
               </ListGroup.Item>
             </ListGroup>
           </Col>
@@ -60,7 +60,7 @@ const ProductScreen = ({ history, match }) => {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Price: </Col>
+                    <Col>Prix: </Col>
                     <Col>
                       <strong>${product.price}</strong>
                     </Col>
@@ -71,7 +71,9 @@ const ProductScreen = ({ history, match }) => {
                   <Row>
                     <Col>Status: </Col>
                     <Col>
-                      {product.countInStock > 0 ? "In Stock" : "Out of Stock"}{" "}
+                      {product.countInStock > 0
+                        ? "En Stock"
+                        : "En Rupture de Stock"}{" "}
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -79,7 +81,7 @@ const ProductScreen = ({ history, match }) => {
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <Row>
-                      <Col>Qty</Col>
+                      <Col>Qté</Col>
                       <Col>
                         <Form.Control
                           as="select"
@@ -106,7 +108,7 @@ const ProductScreen = ({ history, match }) => {
                     type="button"
                     disabled={product.countInStock === 0}
                   >
-                    Add to cart
+                    Ajouter au panier
                   </Button>
                 </ListGroup.Item>
               </ListGroup>

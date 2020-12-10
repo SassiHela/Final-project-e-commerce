@@ -40,7 +40,10 @@ const CartScreen = ({ match, location, history }) => {
         <h1>Panier</h1>
         {cartItems.length === 0 ? (
           <Message>
-            Panier vide. <Link to="/">Continuer Vos Achats</Link>{" "}
+            Panier vide.{" "}
+            <Link to="/" style={{ textDecoration: "underline" }}>
+              Continuer Vos Achats
+            </Link>
           </Message>
         ) : (
           <ListGroup variant="flush">

@@ -19,7 +19,7 @@ const Header = () => {
       <Navbar bg="light" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Zéro Déchet</Navbar.Brand>
+            <Navbar.Brand>Tunisie Recyclage</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -32,9 +32,11 @@ const Header = () => {
               </LinkContainer>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Se déconnecter
-                  </NavDropdown.Item>
+                  <LinkContainer to="/">
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Se déconnecter
+                    </NavDropdown.Item>
+                  </LinkContainer>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">

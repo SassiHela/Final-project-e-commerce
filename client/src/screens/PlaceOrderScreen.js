@@ -59,7 +59,7 @@ const PlaceOrderScreen = ({ history }) => {
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Détails De Facturation</h2>
+              <h2>Détails De Livraison</h2>
               <p>
                 <strong>Adresse : </strong>
                 {shippingAddress.address},{shippingAddress.city}{" "}
@@ -129,7 +129,7 @@ const PlaceOrderScreen = ({ history }) => {
 
               <ListGroup.Item>
                 <Row>
-                  <Col>Tax</Col>
+                  <Col>Taxe</Col>
                   <Col>${cart.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>

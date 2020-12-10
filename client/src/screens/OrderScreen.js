@@ -36,14 +36,14 @@ const OrderScreen = ({ match }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      <h1>Order {order._id}</h1>
+      <h1>Commande {order._id}</h1>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Shipping</h2>
+              <h2>Détails de livraison</h2>
               <p>
-                <strong>Name : </strong>
+                <strong>Nom de l'utilsateur : </strong>
                 {order.user.name}
               </p>
               <p>
@@ -51,37 +51,37 @@ const OrderScreen = ({ match }) => {
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
               <p>
-                <strong>Address : </strong>
+                <strong>Adresse : </strong>
                 {order.shippingAddress.address},{order.shippingAddress.city}{" "}
                 {order.shippingAddress.postalCode},
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
-                  Delivered on {order.deliveredAt}
+                  Delivré le {order.deliveredAt}
                 </Message>
               ) : (
-                <Message variant="danger">Not Delivered</Message>
+                <Message variant="danger">Non Delivré</Message>
               )}
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>Payment Method</h2>
+              <h2>Methode de paiement</h2>
               <p>
-                <strong>Method : </strong>
+                <strong>Methode : </strong>
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">Paid on {order.PaidAt}</Message>
+                <Message variant="success">Payé le {order.PaidAt}</Message>
               ) : (
-                <Message variant="danger">Not Paid</Message>
+                <Message variant="danger">Non Payé</Message>
               )}
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>Order Items</h2>
+              <h2>Panier</h2>
               {order.orderItems.length === 0 ? (
-                <Message>Order is empty</Message>
+                <Message>Panier vide</Message>
               ) : (
                 <ListGroup variant="flush">
                   {order.orderItems.map((item, index) => (
@@ -116,32 +116,32 @@ const OrderScreen = ({ match }) => {
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2>Order Summary</h2>
+                <h2>récapitulatif</h2>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Items</Col>
+                  <Col>Produits</Col>
                   <Col>${order.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
-                  <Col>Shipping</Col>
+                  <Col>Frais de livraison</Col>
                   <Col>${order.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
-                  <Col>Tax</Col>
+                  <Col>Taxe</Col>
                   <Col>${order.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
-                  <Col>Total</Col>
+                  <Col>Totale</Col>
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>

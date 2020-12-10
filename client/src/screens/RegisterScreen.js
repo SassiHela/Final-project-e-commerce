@@ -31,6 +31,12 @@ const RegisterScreen = ({ location, history }) => {
       setMessage(
         "Les mots de passes que vous avez saisis ne correspondent pas !"
       );
+    } else if (!name) {
+      setMessage("Saisissez un nom d'utilisateur !");
+    } else if (!email) {
+      setMessage("Saisissez une adresse email !");
+    } else if (!password) {
+      setMessage("Saisissez un mot de passe !");
     } else {
       dispatch(register(name, email, password));
     }
@@ -69,8 +75,9 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Label>Mot de passe</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Mot de passe"
+            placeholder="Mot de passe (6 caractères minimum)"
             value={password}
+            minlength="6"
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>

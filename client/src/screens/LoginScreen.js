@@ -36,7 +36,7 @@ const LoginScreen = ({ location, history }) => {
 
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
-          <Form.Label>Adresse mail</Form.Label>
+          <Form.Label>Adresse email</Form.Label>
           <Form.Control
             type="email"
             placeholder="Email"
@@ -56,7 +56,7 @@ const LoginScreen = ({ location, history }) => {
         </Form.Group>
 
         <Button type="submit" variant="primary">
-          Sign In
+          Se connecter
         </Button>
       </Form>
 
