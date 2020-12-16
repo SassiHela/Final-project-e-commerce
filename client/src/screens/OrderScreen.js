@@ -1,18 +1,28 @@
 import React, { useEffect } from "react";
-import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getOrderDetails } from "../actions/orderAction";
+import { getOrderDetails, payOrder } from "../actions/orderAction";
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
-const OrderScreen = ({ match }) => {
+const stripePromise = loadStripe(
+  "pk_test_51HpzXbDAmERAuXVO6xDI2PYWhySNN2czMLGbklM3qVzwmUw7uaynq3BcZU4d72rZqNmEBLcp0CGXifH2m2IZU05v00g2q0gP5x"
+);
+
+const OrderScreen = ({ match, history }) => {
   const dispatch = useDispatch();
 
   const orderId = match.params.id;
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
   //Calculate prices
   const addDecimals = (num) => {
@@ -25,10 +35,35 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
-    if (!order || order._id !== orderId) {
+    if (!order || successPay || order._id !== orderId) {
+      dispatch({ type: ORDER_PAY_RESET });
+
       dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, order, orderId]);
+  }, [dispatch, order, orderId, successPay]);
+
+  const successPayementHandler = async (event) => {
+    // Get Stripe.js instance
+    const stripe = await stripePromise;
+
+    // Call your backend to create the Checkout Session
+    const { data } = await axios.post("/create-checkout-session", order);
+
+    const session = data;
+
+    // When the customer clicks on the button, redirect them to Checkout.
+    dispatch(payOrder(orderId));
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+    }
+  };
 
   return loading ? (
     <Loader />
@@ -72,7 +107,7 @@ const OrderScreen = ({ match }) => {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">Payé le {order.PaidAt}</Message>
+                <Message variant="success">Payé le {order.paidAt}</Message>
               ) : (
                 <Message variant="danger">Non Payé</Message>
               )}
@@ -128,31 +163,37 @@ const OrderScreen = ({ match }) => {
               <ListGroup.Item>
                 <Row>
                   <Col>Frais de livraison</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>${addDecimals(order.shippingPrice)}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Taxe</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>${addDecimals(order.taxPrice)}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Totale</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>${addDecimals(order.totalPrice)}</Col>
                 </Row>
               </ListGroup.Item>
-              {/* {!order.isPaid && (
+              {!order.isPaid && (
                 <ListGroup.Item>
-                  {!loadingPay ? (
-                    <Loader />
-                  ) : (
-                  )}
+                  {loadingPay && <Loader />}
+                  <Button
+                    type="button"
+                    className="btn-block"
+                    id="checkout-button"
+                    onClick={successPayementHandler}
+                    role="link"
+                  >
+                    Payer
+                  </Button>
                 </ListGroup.Item>
-              )} */}
+              )}
             </ListGroup>
           </Card>
         </Col>
