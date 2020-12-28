@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const asyncHandler = require("express-async-handler");
+const path = require("path");
 
 dotenv.config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -17,8 +18,6 @@ connectDB();
 
 //Init middleware
 app.use(express.json({ extended: false }));
-
-app.get("/", (req, res) => res.send("Server is up and running"));
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
@@ -63,6 +62,16 @@ app.post(
     res.json({ id: session.id });
   })
 );
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => res.send("Server is up and running"));
+}
 
 app.use(notFound);
 
