@@ -2,3 +2,6 @@ node_modules/
 config/
 .env
 client/node_modules/
+
+# production
+/client/build
