@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getOrderDetails, payOrder } from "../actions/orderAction";
+import { getOrderDetails } from "../actions/orderAction";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
