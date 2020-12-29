@@ -54,8 +54,10 @@ app.post(
       payment_method_types: ["card"],
       line_items: items,
       mode: "payment",
-      success_url: `https://tunisierecyclage.herokuapp.com/order/${_id}?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: "http://localhost:3000/cancel",
+      //success_url: `https://tunisierecyclage.herokuapp.com/order/${_id}?session_id={CHECKOUT_SESSION_ID}`,
+
+      success_url: `http://localhost:3000/order/${_id}/pay`,
+      cancel_url: `http://localhost:3000/order/${_id}/cancel`,
       customer_email: user.email,
     });
 

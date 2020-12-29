@@ -52,8 +52,6 @@ const OrderScreen = ({ match, history }) => {
     const session = data;
 
     // When the customer clicks on the button, redirect them to Checkout.
-    dispatch(payOrder(orderId));
-
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
     });
@@ -106,11 +104,12 @@ const OrderScreen = ({ match, history }) => {
                 <strong>Methode : </strong>
                 {order.paymentMethod}
               </p>
-              {order.isPaid ? (
+              {/* {order.isPaid ? (
                 <Message variant="success">Payé le {order.paidAt}</Message>
               ) : (
                 <Message variant="danger">Non Payé</Message>
-              )}
+              )} */}
+              <Message variant="danger">Non Payé</Message>
             </ListGroup.Item>
 
             <ListGroup.Item>
